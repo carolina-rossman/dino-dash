@@ -41,15 +41,12 @@ class PowerUps:
         pass 
         #look at code for shield power-up)
 
-
-
-
-class power_downs():
-    def create_powerdowns(self):
+class PowerDowns:
+    def __init__(self):
         self.speed_up = pygame.image.load(file = "../stimuli/double_time_token.png")
         self.tiny_dino = pygame.image.load(file = "../stimuli/tiny_dino_token.png")
-        self.selected_powerdown = random.choice([self.speed_up, self.tiny_dino])
-        
+        self.powerdowns_list = random.choice([self.speed_up, self.tiny_dino])
+        self.image = random.choice(self.powerdowns_list)
     def create_obstacles(self): 
         self.fence = pygame.image.load(file= "../stimuli/fence.png")
         self.bush = pygame.image.load(file = "../stimuli/bush.png")
