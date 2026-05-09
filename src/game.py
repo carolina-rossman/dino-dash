@@ -13,8 +13,9 @@ class PowerUps:
         self.jetpack = pygame.transform.scale(pygame.image.load("../stimuli/jetpack_token.png"), (50, 70))
         self.immunity = pygame.transform.scale(pygame.image.load("../stimuli/shield_token.png"), (50, 70))
         self.revival = pygame.transform.scale(pygame.image.load("../stimuli/life_token.png"), (50, 70))
+        self.nothing = pygame.transform.scale(pygame.image.load("../stimuli/white_screen.png"), (1, 1))
         #selecting random image 
-        self.powerups_list = [self.jetpack, self.immunity, self.revival]
+        self.powerups_list = [self.jetpack, self.immunity, self.revival, self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing, self.nothing]
         # to increase number of jetpacks likelihood to spawn, just add more self.jetpack above 
         self.image = random.choice(self.powerups_list)
         self.rect = self.image.get_rect()
@@ -37,34 +38,48 @@ class PowerUps:
     def draw(self, screen):
         screen.blit(self.image, self.rect)
     
-    def reset_location(self): 
+    def jetpack(self):
+        pass
+    def immunity(self): 
         pass 
+
+    def revival(self):
+        pass
         #look at code for shield power-up)
 
 class PowerDowns:
-    def __init__(self):
-        self.speed_up = pygame.image.load(file = "../stimuli/double_time_token.png")
-        self.tiny_dino = pygame.image.load(file = "../stimuli/tiny_dino_token.png")
-        self.powerdowns_list = random.choice([self.speed_up, self.tiny_dino])
+    def __init__(self, screen_width, screen_height):
+        self.speed_up = pygame.transform.scale(pygame.image.load("../stimuli/double_time_token.png"), (50, 70))
+        self.tiny_dino = pygame.transform.scale(pygame.image.load("../stimuli/tiny_dino_token.png"), (50, 70))
+        self.nothing = pygame.transform.scale(pygame.image.load("../stimuli/white_screen.png"), (1, 1))
+        self.powerdowns_list = [self.speed_up, self.tiny_dino, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing]
         self.image = random.choice(self.powerdowns_list)
+        self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+        self.screen_width = screen_width
+        self.screen_height = screen_height 
+        self.rect.x = screen_width + random.randint(100,300)
+        self.rect.y = 45
+        self.speed = 5
+    def move(self): 
+        self.rect.x -= self.speed 
+        if self.rect.right < 0: 
+            self.rect.x = self.screen_width + random.randint(100, 500)
+            self.image = random.choice(self.powerdowns_list)
+            self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
+            return True
+        return False  
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
+
+class Obstacles:
     def create_obstacles(self): 
-        self.fence = pygame.image.load(file= "../stimuli/fence.png")
-        self.bush = pygame.image.load(file = "../stimuli/bush.png")
+        self.fence = pygame.image.load("../stimuli/fence.png")
+        self.bush = pygame.image.load("../stimuli/bush.png")
         self.selected_obstacles = random.choice (self.bush, self.fence)
         # generate those images as background scrolls 
         # use pygame
 
-    def spawn_powerups(self):
-        power_ups = self.selected_powerup(800, random.randint(100,500))
-        power_ups.add(power_ups)
-    
-    def spawn_powerdown(self):
-        power_down = self.selected_powerdown(800, random.randint(100,500))
-        power_down.add(power_down)
-    
-    def spawn_obstacleds(self): 
-        obstacles = self.selected_obstacles(800, random.randint(100,500))
-        obstacles.add(obstacles)
 
 def main(): 
      pygame.init()
@@ -79,6 +94,7 @@ def main():
      jumping_surface = pygame.transform.scale(pygame.image.load("../stimuli/jumping_dino.png"), (25, 35))
      background = scrolling_background.Game()
      spawned_powerups = [PowerUps(screen_width, screen_height) for _ in range(1)]
+     spawned_powerdown = [PowerDowns(screen_width, screen_height) for _ in range(1)]
      running = True 
      while running: 
         for event in pygame.event.get():
@@ -91,6 +107,8 @@ def main():
             bg.update(-background.speed)
         for power in spawned_powerups: 
             power.move()
+        for power in spawned_powerdown:
+            power.move()
         if jumping: 
             y_pos -= y_vel
             y_vel -= y_gravity
@@ -100,6 +118,8 @@ def main():
         for bg in background.bg:
             bg.show(screen)
         for power in spawned_powerups: 
+            power.draw(screen)
+        for power in spawned_powerdown: 
             power.draw(screen)
         dino_rect = standing_surface.get_rect(center =(x_pos, y_pos))
         if jumping: 
