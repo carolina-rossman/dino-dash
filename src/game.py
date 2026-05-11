@@ -110,6 +110,7 @@ def main():
      normal_speed = background.speed
      spawned_powerups = [PowerUps(screen_width, screen_height) for _ in range(1)]
      spawned_powerdown = [PowerDowns(screen_width, screen_height) for _ in range(1)]
+     spawned_obstacles = [Obstacles(screen_width, screen_height) for _ in range(1)]
      running = True 
      jetpack_active = False 
      jetpack_time = 0 
@@ -201,6 +202,10 @@ def main():
             if y_vel < -jump_height:
                 jumping = False
                 y_vel = jump_height
+        for obstacle in spawned_obstacles:
+            obstacle.move()
+            if dino_rect.colliderect(obstacle.rect):
+                pass
         for bg in background.bg:
             bg.show(screen)
         for power in spawned_powerups: 
