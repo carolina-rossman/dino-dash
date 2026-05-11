@@ -4,7 +4,6 @@ from pygame.sprite import Sprite
 from pygame.rect import Rect 
 import instructions_screen
 import sys
-import game
 
 class Display(): 
     screen_size = (800, 600)
