@@ -85,10 +85,13 @@ def main():
      standing_dino = pygame.transform.scale(pygame.image.load("../stimuli/dino.png"), (25, 35))
      normal_dino = standing_dino
      jumping_surface = pygame.transform.scale(pygame.image.load("../stimuli/jumping_dino.png"), (25, 35))
+     jumping_dino = jumping_surface
      jetpack_dino = pygame.transform.scale(pygame.image.load("../stimuli/jetpack_dino.png"), (25, 35))
      immunity_dino = pygame.transform.scale(pygame.image.load("../stimuli/shield_dino.png"), (25, 35))
-     tiny_dino = pygame.transform.scale(pygame.image.load("../stimuli/tiny_dino.png"), (15, 25))
+     tiny_dino = pygame.transform.scale(pygame.image.load("../stimuli/tiny_dino.png"), (20, 30))
+     tiny_dino_jumping = pygame.transform.scale(pygame.image.load("../stimuli/tiny_dino.png"), (20, 30))
      background = scrolling_background.Game()
+     normal_speed = background.speed
      spawned_powerups = [PowerUps(screen_width, screen_height) for _ in range(1)]
      spawned_powerdown = [PowerDowns(screen_width, screen_height) for _ in range(1)]
      running = True 
@@ -131,11 +134,13 @@ def main():
             if speedup_time <= 0:
                 speedup_active = False 
                 normal_dino = standing_dino
+                background.speed = normal_speed
         if tinydino_active:
             tinydino_time -= 1
             if tinydino_time <= 0:
                 tinydino_active = False 
                 normal_dino = standing_dino
+                jumping_dino = jumping_surface
         dino_rect = normal_dino.get_rect(center=(x_pos, y_pos))
         for bg in background.bg: 
             bg.update(-background.speed)
@@ -163,11 +168,13 @@ def main():
                 if power.image == power.speed_up:
                     speedup_active = True 
                     speedup_time = 500
+                    background.speed = normal_speed * 5
             #cause a reaction
                 elif power.image == power.tiny_dino:
                     tinydino_active = True 
                     tinydino_time = 500
                     normal_dino = tiny_dino
+                    jumping_dino = tiny_dino_jumping
             #cause a reaction
                 power.rect.x = -100
         if jumping: 
@@ -184,7 +191,7 @@ def main():
             power.draw(screen)
         dino_rect = normal_dino.get_rect(center =(x_pos, y_pos))
         if jumping: 
-            screen.blit(jumping_surface, dino_rect)
+            screen.blit(jumping_dino, dino_rect)
         else: 
             screen.blit(normal_dino, dino_rect)
         pygame.display.flip()
