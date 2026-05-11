@@ -177,6 +177,7 @@ def main():
                     immunity_active = True 
                     immunity_time = 500
                     normal_dino = immunity_dino
+                    jumping_dino = immunity_dino
                     #can't die, use obstacles death variable once created
                 else:
                     revival_active = True 
