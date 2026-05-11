@@ -68,7 +68,25 @@ class Obstacles:
     def create_obstacles(self): 
         self.fence = pygame.image.load("../stimuli/fence.png")
         self.bush = pygame.image.load("../stimuli/bush.png")
-        self.selected_obstacles = random.choice (self.bush, self.fence)
+        self.obstacle_list = [self.bush, self.fence]
+        self.image = random.choice(self.obstacle_list)
+        self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+        self.screen_width = screen_width
+        self.screen_height = screen_height
+        self.rect.x = screen_width + random.randint(100,300)
+        self.rect.y = 45
+        self.speed = 5
+    def move(self):
+        self.rect.x -= self.speed
+        if self.rect.right < 0:
+            self.rect.x = self.screen_width + random.randint(100, 500)
+            self.image = random.choice(self.obstacle_list)
+            self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
+            return True
+        return False
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
         # generate those images as background scrolls 
         # use pygame
 
