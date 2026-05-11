@@ -15,7 +15,7 @@ class PowerUps:
         self.revival = pygame.transform.scale(pygame.image.load("../stimuli/life_token.png"), (50, 70))
         self.nothing = pygame.transform.scale(pygame.image.load("../stimuli/white_screen.png"), (1, 1))
         #selecting random image 
-        self.powerups_list = [self.jetpack, self.immunity, self.revival, self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing, self.nothing]
+        self.powerups_list = [self.jetpack, self.immunity, self.revival, self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing, self.nothing, self.nothing]
         # to increase number of jetpacks likelihood to spawn, just add more self.jetpack above 
         self.image = random.choice(self.powerups_list)
         self.rect = self.image.get_rect()
@@ -44,7 +44,7 @@ class PowerDowns:
         self.speed_up = pygame.transform.scale(pygame.image.load("../stimuli/double_time_token.png"), (50, 70))
         self.tiny_dino = pygame.transform.scale(pygame.image.load("../stimuli/tiny_dino_token.png"), (50, 70))
         self.nothing = pygame.transform.scale(pygame.image.load("../stimuli/white_screen.png"), (1, 1))
-        self.powerdowns_list = [self.speed_up, self.tiny_dino, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing]
+        self.powerdowns_list = [self.speed_up, self.tiny_dino,self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing]
         self.image = random.choice(self.powerdowns_list)
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
@@ -141,6 +141,7 @@ def main():
                 tinydino_active = False 
                 normal_dino = standing_dino
                 jumping_dino = jumping_surface
+                y_pos = 95
         dino_rect = normal_dino.get_rect(center=(x_pos, y_pos))
         for bg in background.bg: 
             bg.update(-background.speed)
@@ -175,6 +176,7 @@ def main():
                     tinydino_time = 500
                     normal_dino = tiny_dino
                     jumping_dino = tiny_dino_jumping
+                    y_pos = 100
             #cause a reaction
                 power.rect.x = -100
         if jumping: 
@@ -191,8 +193,10 @@ def main():
             power.draw(screen)
         dino_rect = normal_dino.get_rect(center =(x_pos, y_pos))
         if jumping: 
+            dino_rect = jumping_dino.get_rect(center = (x_pos, y_pos))
             screen.blit(jumping_dino, dino_rect)
         else: 
+            dino_rect = normal_dino.get_rect(center = (x_pos, y_pos))
             screen.blit(normal_dino, dino_rect)
         pygame.display.flip()
         clock.tick(60)
