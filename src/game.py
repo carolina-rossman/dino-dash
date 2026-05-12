@@ -38,7 +38,6 @@ class PowerUps:
     def draw(self, screen):
         screen.blit(self.image, self.rect)
     
-
 class PowerDowns:
     def __init__(self, screen_width, screen_height):
         self.speed_up = pygame.transform.scale(pygame.image.load("../stimuli/double_time_token.png"), (50, 70))
@@ -96,7 +95,9 @@ def main():
      pygame.init()
      screen = pygame.display.set_mode((screen_width, screen_height))
      clock = pygame.time.Clock()
-     x_pos, y_pos = 100, 95
+     x_pos = 100
+     ground = 95 
+     y_pos = ground 
      jumping = False 
      y_gravity = 0.5
      jump_height = 8 
@@ -131,7 +132,8 @@ def main():
                 running = False
         keys_pressed = pygame.key.get_pressed()
         if keys_pressed[pygame.K_SPACE]: 
-            jumping = True
+            if not jetpack_active:
+                jumping = True
         if jetpack_active:
             jetpack_time -= 1
             if jetpack_time <= 0:
@@ -161,7 +163,9 @@ def main():
                 tinydino_active = False 
                 normal_dino = standing_dino
                 jumping_dino = jumping_surface
-                y_pos = 95
+                ground = 95
+                if not jumping: 
+                    y_pos = ground 
         dino_rect = normal_dino.get_rect(center=(x_pos, y_pos))
         for bg in background.bg: 
             bg.update(-background.speed)
@@ -173,6 +177,8 @@ def main():
                     jetpack_time = 500
                     normal_dino = jetpack_dino
                     y_pos = 30 
+                    jumping = False 
+                    y_vel = jump_height
                 elif power.image == power.immunity:
                     immunity_active = True 
                     immunity_time = 500
@@ -197,12 +203,18 @@ def main():
                     tinydino_time = 500
                     normal_dino = tiny_dino
                     jumping_dino = tiny_dino_jumping
-                    y_pos = 100
+                    ground = 100
+                    if not jumping: 
+                        y_pos = ground 
             #cause a reaction
                 power.rect.x = -100
         if jumping: 
             y_pos -= y_vel
             y_vel -= y_gravity
+            if y_pos >= ground:
+                y_pos = ground 
+                jumping = False 
+                y_vel = jump_height
             if y_vel < -jump_height:
                 jumping = False
                 y_vel = jump_height
