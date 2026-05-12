@@ -6,6 +6,7 @@ to provide our take on the genre of side-scrolling games. Together, we have work
 experience like no other, creating an addictive experience for all. 
 
 ## To Run the Game
+       You will need to install pygame for this by typing "uv add pygame" into your terminal
        To run the game download the src and stimuli folders
        In your terminal, put in "uv run python main.py"
        Make sure your path is "...\dino-dash\src"
