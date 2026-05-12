@@ -18,7 +18,7 @@ class Display:
             screen.fill((255, 255, 255))
             text_surface, rect = font.render("You Died", (0, 0, 0))
             screen.blit(text_surface, (40, 250))
-            font.render_to(screen, (40, 350), "You Died", (0, 0, 0))
+            # font.render_to(screen, (40, 350), "You Died", (0, 0, 0))
 
             pygame.display.flip()
 
