@@ -15,7 +15,7 @@ class PowerUps:
         self.revival = pygame.transform.scale(pygame.image.load("../stimuli/life_token.png"), (50, 70))
         self.nothing = pygame.transform.scale(pygame.image.load("../stimuli/white_screen.png"), (1, 1))
         #selecting random image 
-        self.powerups_list = [self.jetpack, self.immunity, self.revival, self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing, self.nothing, self.nothing]
+        self.powerups_list = [self.jetpack, self.immunity, self.revival, self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing,self.nothing]
         # to increase number of jetpacks likelihood to spawn, just add more self.jetpack above 
         self.image = random.choice(self.powerups_list)
         self.rect = self.image.get_rect()
@@ -27,9 +27,12 @@ class PowerUps:
         self.speed = 5
         #speed of power-up, as it passes
     
-    def move(self):
+    def move(self, blocked):
         self.rect.x -= self.speed 
         if self.rect.right < 0: 
+            if blocked:
+                self.rect.x = self.screen_width + 10000
+                return False 
             self.rect.x = self.screen_width + random.randint(100, 500)
             self.image = random.choice(self.powerups_list)
             self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
@@ -43,7 +46,7 @@ class PowerDowns:
         self.speed_up = pygame.transform.scale(pygame.image.load("../stimuli/double_time_token.png"), (50, 70))
         self.tiny_dino = pygame.transform.scale(pygame.image.load("../stimuli/tiny_dino_token.png"), (50, 70))
         self.nothing = pygame.transform.scale(pygame.image.load("../stimuli/white_screen.png"), (1, 1))
-        self.powerdowns_list = [self.speed_up, self.tiny_dino,self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing]
+        self.powerdowns_list = [self.speed_up, self.tiny_dino,self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing, self.nothing]
         self.image = random.choice(self.powerdowns_list)
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
@@ -52,9 +55,12 @@ class PowerDowns:
         self.rect.x = screen_width + random.randint(100,300)
         self.rect.y = 45
         self.speed = 5
-    def move(self): 
+    def move(self, blocked): 
         self.rect.x -= self.speed 
         if self.rect.right < 0: 
+            if blocked: 
+                self.rect.x = self.screen_width + 10000
+                return False 
             self.rect.x = self.screen_width + random.randint(100, 500)
             self.image = random.choice(self.powerdowns_list)
             self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
@@ -126,6 +132,7 @@ def main():
      speedup_time = 0 
      tinydino_active = False 
      tinydino_time = 0 
+     any_active_powerup_powerdown = False 
      while running: 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
@@ -167,11 +174,16 @@ def main():
                 if not jumping: 
                     y_pos = ground 
         dino_rect = normal_dino.get_rect(center=(x_pos, y_pos))
+        any_active_powerup_powerdown = (jetpack_time > 0 or  
+                                        immunity_time > 0 or 
+                                        revival_time > 0 or 
+                                        speedup_time > 0 or 
+                                        tinydino_time > 0)
         for bg in background.bg: 
             bg.update(-background.speed)
         for power in spawned_powerups: 
-            power.move()
-            if dino_rect.colliderect(power.rect):
+            power.move(any_active_powerup_powerdown)
+            if not any_active_powerup_powerdown and dino_rect.colliderect(power.rect):
                 if power.image == power.jetpack:
                     jetpack_active = True
                     jetpack_time = 500
@@ -191,7 +203,7 @@ def main():
                     #cause a reaction, revival 
                 power.rect.x = -100
         for power in spawned_powerdown:
-            power.move()
+            power.move(any_active_powerup_powerdown)
             if dino_rect.colliderect(power.rect):
                 if power.image == power.speed_up:
                     speedup_active = True 
