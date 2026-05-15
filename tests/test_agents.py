@@ -20,7 +20,7 @@ def test_background(mock_dispay, mock_load):
     mock_load.return_value = Mock()
     game = scrolling_background.Game()
     bg = scrolling_background(x=0) #Intializing background object x= 0
-    speed = 5.0 #testing background movement
+    speed = 2.0 #testing background movement
 
 def test_scoreboard():
 
