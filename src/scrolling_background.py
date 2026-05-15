@@ -44,7 +44,7 @@ class Game:
 
     def __init__(self):
         self.bg = [BG(x=0), BG(x=WIDTH) ]
-        self.speed = 0.3
+        self.speed = 0.6
 
 
 def main():
