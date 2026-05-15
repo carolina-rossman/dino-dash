@@ -55,7 +55,7 @@ class Obstacles:
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.rect.x = screen_width + random.randint(100,300)
-        self.rect.y = 45
+        self.rect.y = 95
         self.speed = 5
         #speed of obstacle as it goes across the screen
 
