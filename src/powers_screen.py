@@ -1,6 +1,6 @@
 import pygame 
 import sys
-import base_dino
+import game
 
 class Display(): 
     screen_size = (800, 600)
@@ -41,8 +41,7 @@ class Display():
                 if event.type == pygame.MOUSEBUTTONDOWN: 
                     print("Start clicked!")
                     if self.start_button.collidepoint(event.pos):
-                        new_screen = base_dino.run_game()
-                        new_screen.go()
+                        game.main()
                     if self.quit_button.collidepoint(event.pos): 
                         pygame.quit()
                         sys.exit()
