@@ -11,21 +11,20 @@ screen_height = 150
 class Powers:
     def __init__(self, screen_width, screen_height):
         #loading images for powerups 
-        self.jetpack = pygame.transform.scale(pygame.image.load("../stimuli/jetpack_token.png"), (50, 70))
-        self.immunity = pygame.transform.scale(pygame.image.load("../stimuli/shield_token.png"), (50, 70))
-        self.revival = pygame.transform.scale(pygame.image.load("../stimuli/life_token.png"), (50, 70))
+        self.jetpack = pygame.transform.scale(pygame.image.load("../stimuli/jetpack_token.png"), (30, 30))
+        self.immunity = pygame.transform.scale(pygame.image.load("../stimuli/shield_token.png"), (30, 30))
+        self.revival = pygame.transform.scale(pygame.image.load("../stimuli/life_token.png"), (30, 30))
         self.nothing = pygame.transform.scale(pygame.image.load("../stimuli/white_screen.png"), (1, 1))
-        self.speed_up = pygame.transform.scale(pygame.image.load("../stimuli/double_time_token.png"), (25, 25))
-        self.tiny_dino = pygame.transform.scale(pygame.image.load("../stimuli/tiny_dino_token.png"), (50, 70))
-        # self.all_powers = [self.jetpack, self.immunity, self.revival, self.speed_up, self.tiny_dino, self.nothing, self.nothing, self.nothing] 
-        self.all_powers = [self.speed_up, self.speed_up] 
+        self.speed_up = pygame.transform.scale(pygame.image.load("../stimuli/double_time_token.png"), (30, 30))
+        self.tiny_dino = pygame.transform.scale(pygame.image.load("../stimuli/tiny_dino_token.png"), (30, 30))
+        self.all_powers = [self.jetpack, self.immunity, self.revival, self.speed_up, self.tiny_dino, self.nothing, self.nothing, self.nothing] 
         self.image = random.choice(self.all_powers)
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
         self.screen_width = screen_width
         self.screen_height = screen_height 
         self.rect.x = screen_width + random.randint(100,300)
-        self.rect.y = 45
+        self.rect.y = 85
         self.speed = 5
         #speed of power-up, as it passes
     
@@ -39,7 +38,7 @@ class Powers:
             self.rect = self.image.get_rect()
             self.mask = pygame.mask.from_surface(self.image)
             self.rect.x = self.screen_width + random.randint(100, 500)
-            self.rect.y = 45
+            self.rect.y = 85
             return True
         return False  
     def draw(self, screen):
