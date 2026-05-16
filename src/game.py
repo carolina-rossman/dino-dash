@@ -126,7 +126,7 @@ def main():
         if keys_pressed[pygame.K_SPACE]: 
             if not jetpack_active:
                 jumping = True
-        # counts down the time of the powerup/power down being active and when the time is out sets everything back to normal 
+        # counts down the time of the powerup/power down being active and when the time is out undos the effect from the various powerups/powerdowns
         if jetpack_active:
             jetpack_time -= 1
             if jetpack_time <= 0:
@@ -168,8 +168,11 @@ def main():
             dino_rect = normal_dino.get_rect (center = (x_pos, y_pos))
         for power in spawned_powers: 
             power.move(any_active_powerup_powerdown)
+            # checks to make sure the image isn't power.nothing, so that remains having no effect 
             if power.image != power.nothing: 
+                # if the dino collides with the powerup/powerdown then the following code takes effect
                 if dino_rect.colliderect(power.rect):
+                    # check what power is ran into, and then causes the power's effect through variable manipulation
                     if power.image == power.jetpack:
                         jetpack_active = True
                         jetpack_time = 500
@@ -194,11 +197,13 @@ def main():
                         ground = 100
                         if not jumping: 
                             y_pos = ground 
-            #cause a reaction
+                    # if the dino runs into a power, it send the power off the screen so it gives the effect of being activated
                     power.rect.x = -100
+        # makes the dino jump
         if jumping: 
             y_pos -= y_vel
             y_vel -= y_gravity
+            #checks to make sure the dino returns to the ground, done so to fix bugs from jetpack and tiny dino powers
             if y_pos >= ground:
                 y_pos = ground 
                 jumping = False 
@@ -209,10 +214,13 @@ def main():
         for obstacle in spawned_obstacles:
             obstacle.move()
             if dino_rect.colliderect(obstacle.rect):
+                # checks to see if god_mode is active, and if it is makes the dino immune by passing this function 
                 if god_mode:
                     pass
+                # check to see if immunity powerup is active, and if it is makes the dino immune by passing this function 
                 elif immunity_active:
                     pass
+                # if dino isn't in god_mode or the imunity powerup isn't active then if the obstacle is hit the death.screen.py runs
                 else:
                     death_screen.main()
                     return
@@ -233,6 +241,6 @@ def main():
         clock.tick(60)
      pygame.quit()
 
-
+# runs main 
 if __name__ == "__main__":
     main()
