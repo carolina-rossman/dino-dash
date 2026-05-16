@@ -208,8 +208,16 @@ def main():
         for obstacle in spawned_obstacles:
             obstacle.move()
             if dino_rect.colliderect(obstacle.rect):
-                death_screen.main
-                return
+                if immunity_active:
+                    pass
+                elif revival_active:
+                    revival_active = False
+                    revival_time = 0 
+                    normal_dino = standing_dino
+                    obstacle.rect.x = -100
+                else:
+                    death_screen.main()
+                    return
         for bg in background.bg:
             bg.show(screen)
         for power in spawned_powers: 
