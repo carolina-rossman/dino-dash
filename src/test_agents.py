@@ -5,7 +5,6 @@ import pygame
 import main
 import start_screen
 import instructions_screen
-import base_dino
 import scrolling_background
 import scoreboard
 import powers_screen

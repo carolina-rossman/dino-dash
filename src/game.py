@@ -1,7 +1,6 @@
 # code is based on this youtube video: https://www.youtube.com/watch?v=6zRqd-gyO4c
 import random
 import pygame
-import base_dino
 import scrolling_background
 import death_screen
 
@@ -83,6 +82,7 @@ def main():
      ground = 95 
      y_pos = ground 
      # importing variables so the dino jumps, and so it can be manipulated in the effect of powerups and powerdowns
+     # all dino movement code is based from this YouTube Video https://www.youtube.com/watch?v=ST-Qq3WBZBE
      jumping = False 
      y_gravity = 0.5
      jump_height = 8 
@@ -206,7 +206,7 @@ def main():
                             y_pos = ground 
                     # if the dino runs into a power, it send the power off the screen so it gives the effect of being activated
                     power.rect.x = -100
-        # makes the dino jump
+        # makes the dino jump, logic based on YouTube Video https://www.youtube.com/watch?v=ST-Qq3WBZBE
         if jumping: 
             y_pos -= y_vel
             y_vel -= y_gravity
