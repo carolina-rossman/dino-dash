@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import Mock, patch
 import pygame
 
-import main
+from src import main
 from src import start_screen
 from src import instructions_screen
 from src import base_dino
