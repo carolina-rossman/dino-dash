@@ -135,7 +135,8 @@ def main():
             if jetpack_time <= 0:
                 jetpack_active = False
                 normal_dino = standing_dino
-                y_pos = 95
+                jumping = True 
+                y_vel = 0 
         if immunity_active: 
             immunity_time -= 1
             if immunity_time <= 0: 
