@@ -162,6 +162,10 @@ def main():
                                         immunity_time > 0 or 
                                         speedup_time > 0 or 
                                         tinydino_time > 0)
+        if not speedup_active:
+            game_progression += acceleration_rate
+            normal_speed = 0.6 * game_progression 
+            background.speed = normal_speed
         for bg in background.bg: 
             bg.update(-background.speed)
         if jumping: 

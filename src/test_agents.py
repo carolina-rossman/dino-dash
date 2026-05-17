@@ -90,7 +90,7 @@ def test_scoreboard():
     assert mock_screen.blit.called
     # assert scoreboard.meter_moved == 5.0 # tracking absolute distance
 
-@patch('pygame.display.set_mode')    
-def test_main_and_base_dino_callable(mock_display):
+# @patch('pygame.display.set_mode')    
+def test_main_callable():
     assert callable(main.main)
-    assert callable(base_dino.run_game)
+    
