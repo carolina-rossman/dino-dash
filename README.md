@@ -83,10 +83,10 @@ We will be attempting to recreate an advanced version of the no wifi dinosaur ga
       Patricia Richards: liltrishpzr-glitch
       Carolina Rossman: carolina-rossman
 ### 4. If you are doing a group project, very brief statements (1-2 sentences each) describing:
-      a) How work will be divided (assigned and tracked) among group members.
-      Tracked: We have a Google Doc where everything has been assigned to each person. Github will also track what each person contributes.
-      Assigned: It has already been decided that Alex will find/draw the graphics. We will divide the work based on classes. If we have an amount of classes that is not divisible by three, we will discuss what the fairest division of labor will be. If someone feels they have an undeserved amount of work, we will discuss and re-divide the work.
-      b) How (and how often!) team members will communicate with each other about the project (such as weekly meetings, ongoing group chat, etc.)
+      a) How work will be divided (assigned and tracked) among group members.    
+      Tracked: Through Git can see when someone makes changes to the repository.      
+      Assigned: It has already been decided that Alex will find/draw the graphics. We will   divide the work based on classes. If we have an amount of classes that is not divisible by three, we will discuss what the fairest division of labor will be. If someone feels they have an undeserved amount of work, we will discuss and re-divide the work.   
+      b) How (and how often!) team members will communicate with each other about the   project (such as weekly meetings, ongoing group chat, etc.)  
       We already have an ongoing group chat. We will have in-person meetings on Mondays from 4:30 to 6, starting on week 9. If we feel that our Monday meeting is insufficient, we will also meet on Thursdays at a similar time.
 
 ## Testing
