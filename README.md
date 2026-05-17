@@ -15,14 +15,15 @@ Then in your terminal, put in
 Make sure your path is "...\dino-dash\src"  
 
 ## Names and Parameters
-       1.) Start Screen                      
+       1.) Start Screen + Instruction screen                      
        -The instructions                                          
        -The start button                        
        -the quit button
        
-       2.) Beginning Sequence  
-       - Dino appears on screen, press space bar to start the game 
-       - Dino reaches left side of the screen and background starts to scroll
+       2.) Powers Screen    
+       - Background explains each power-up and power-down 
+       - Start button    
+       - Quit button  
        
       3.) Base Dino 
       - When spacebar is pressed, Dino Jumps
@@ -36,11 +37,6 @@ Make sure your path is "...\dino-dash\src"
       - Immunity: 
       (when an immunity power up is picked up. switch to Dino with shield image)
       (immmunity continues for set amount of time then returns to normal)
-      - Revival: 
-       (The revival power-up is very rare power-up, that a user is lucky to find)
-       (When a revival power-up appears, the dino will be sent to a revival screen 
-       instead of game over if it runs into the obstacle, giving it a second chance)
-       (The revival power-up is active the entire game but can only be used once)
 
       5.) Power Downs
        At set distances a random power down will appear
@@ -51,7 +47,7 @@ Make sure your path is "...\dino-dash\src"
       
        6.) Score Counters
        - Distance Based Counter 
-       - Also show how far from the end the player is
+       - Shows how far from the end the player is
        - Once a certain distance is reached, an end screen
         will appear
         
@@ -71,9 +67,6 @@ Make sure your path is "...\dino-dash\src"
        - Various different images
        - Will randomly appear but we will put a guideline in the code that prevents the obstacles from being too close together.
 
-       10.) High score counter? 
-       - Still debating adding 
-       - Your High score would appear, next to score counter
        
 ## Why Someone Would Use This
 Someone would use this program to pass the time and have fun. This game is meant to be for dinosaur, sci-fi, and side scrolling game lovers.
