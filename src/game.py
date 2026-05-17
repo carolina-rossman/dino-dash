@@ -99,6 +99,8 @@ def main():
      # runs scrolling_background.py as the background for the game 
      background = scrolling_background.Game()
      normal_speed = background.speed
+     game_progression = 1.0 #this tracks the game speed and progesses the game time overtime 
+     acceleration_rate = 0.003
      # selects 1 powers and 2 obstacles and spawns them in 
      spawned_powers = [Powers(screen_width, screen_height) for _ in range(1)]
      spawned_obstacles = [Obstacles(screen_width, screen_height) for _ in range(2)]
