@@ -48,8 +48,8 @@ class Powers:
 class Obstacles:
     def __init__(self, screen_width, screen_height):
         #obstacle images loaded in
-        self.fence = pygame.transform.scale(pygame.image.load("../stimuli/fence.png"), (50, 50))
-        self.bush = pygame.transform.scale(pygame.image.load("../stimuli/bush.png"), (50, 70))
+        self.fence = pygame.transform.scale(pygame.image.load("../stimuli/fence.png"), (30, 30))
+        self.bush = pygame.transform.scale(pygame.image.load("../stimuli/bush.png"), (30, 30))
         self.obstacle_list = [self.bush, self.fence]
         self.image = random.choice(self.obstacle_list)
         self.rect = self.image.get_rect()
@@ -57,7 +57,7 @@ class Obstacles:
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.rect.x = screen_width + random.randint(100,300)
-        self.rect.y = 95
+        self.rect.y = 85
         self.speed = 5
         #speed of obstacle as it goes across the screen
 
@@ -65,6 +65,7 @@ class Obstacles:
         self.rect.x -= self.speed
         if self.rect.right < 0:
             self.rect.x = self.screen_width + random.randint(100, 500)
+            # selects an image at random from obstacles list 
             self.image = random.choice(self.obstacle_list)
             self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
             return True
