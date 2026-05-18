@@ -90,6 +90,7 @@ We will be attempting to recreate an advanced version of the no wifi dinosaur ga
       We already have an ongoing group chat. We will have in-person meetings on Mondays from 4:30 to 6, starting on week 9. If we feel that our Monday meeting is insufficient, we will also meet on Thursdays at a similar time.
 
 ## Testing
+test_agents.py can be found in the src folder done so because of errors that were occuring  
 You can run the test by running pytest in the root directory as a module. Do so by running:  
 uv run pytest test_agents.py   
 
