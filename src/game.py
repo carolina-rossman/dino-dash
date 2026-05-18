@@ -266,8 +266,8 @@ def main():
                     elif power.image == power.speed_up:
                         speedup_active = True
                         speedup_time = 500
-                        #  background.speed = normal_speed * 5
-                        background.speed = 4.0  # when dino reaches 2x icon the background will speed up.
+                        background.speed = normal_speed * 2
+                 # when dino reaches 2x icon the background will speed up.
                     elif power.image == power.tiny_dino:
                         tinydino_active = True
                         tinydino_time = 500
