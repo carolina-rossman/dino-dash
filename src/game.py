@@ -77,7 +77,7 @@ class Obstacles:
             pygame.image.load("../stimuli/bush.png"), (30, 30)
         )
         self.obstacle_list = [self.bush, self.fence]
-        self.obstacle_type = obstacle_type
+        # prevents the obstacles from spawning on top of themselves
         self.obstacle_type = obstacle_type
         if self.obstacle_type is not None:
             self.image = self.obstacle_list[self.obstacle_type]
@@ -88,12 +88,13 @@ class Obstacles:
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.spawn_range = spawn_range
+        # where the obstacle apppears on the screen
         self.rect.x = screen_width + random.randint(
             self.spawn_range[0], self.spawn_range[1]
         )
         self.rect.y = 85
-        self.speed = 5
         # speed of obstacle as it goes across the screen
+        self.speed = 5
 
     def move(self):
         self.rect.x -= self.speed
@@ -154,8 +155,9 @@ def main():
     normal_speed = background.speed
     game_progression = 1.0  # this tracks the game speed and progesses the game time overtime (Patricia coded)
     acceleration_rate = 0.003  # makes the background gradually speedup as the game is played (Patricia coded)
-    # selects 1 powers and 2 obstacles and spawns them in
+    # selects 1 powers and spawns them in
     spawned_powers = [Powers(screen_width, screen_height) for _ in range(1)]
+    # the two obstacles are in different ranges now so that they won't overlap
     spawned_obstacles = [
         Obstacles(screen_width, screen_height, (100, 250), obstacle_type=0),
         Obstacles(screen_width, screen_height, (400, 550), obstacle_type=1),
