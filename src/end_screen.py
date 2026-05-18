@@ -26,7 +26,7 @@ class Display:
         pygame.draw.rect(self.window, (0, 200, 0), self.restart_button)
         pygame.draw.rect(self.window, (200, 0, 0), self.quit_button)
         self.button_font = pygame.font.SysFont("Arial", 20, bold=True)
-        restart_text = self.button_font.render("Restart", True, (255, 255, 255))
+        restart_text = self.button_font.render("Play Again", True, (255, 255, 255))
         quit_text = self.button_font.render("Quit", True, (255, 255, 255))
         self.window.blit(restart_text, (self.restart_button.x, self.restart_button.y))
         self.window.blit(quit_text, (self.quit_button.x, self.quit_button.y))
