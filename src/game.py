@@ -88,7 +88,9 @@ class Obstacles:
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.spawn_range = spawn_range
-        self.rect.x = screen_width + random.randint(spawn_range[0], spawn_range[1])
+        self.rect.x = screen_width + random.randint(
+            self.spawn_range[0], self.spawn_range[1]
+        )
         self.rect.y = 85
         self.speed = 5
         # speed of obstacle as it goes across the screen
@@ -154,7 +156,10 @@ def main():
     acceleration_rate = 0.003  # makes the background gradually speedup as the game is played (Patricia coded)
     # selects 1 powers and 2 obstacles and spawns them in
     spawned_powers = [Powers(screen_width, screen_height) for _ in range(1)]
-    spawned_obstacles = [Obstacles(screen_width, screen_height) for _ in range(2)]
+    spawned_obstacles = [
+        Obstacles(screen_width, screen_height, (100, 250), obstacle_type=0),
+        Obstacles(screen_width, screen_height, (400, 550), obstacle_type=1),
+    ]
     # setting variables to manipulate for powerups and powerdowns
     running = True
     god_mode = False
