@@ -68,30 +68,42 @@ class Powers:
 
 
 class Obstacles:
-    def __init__(self, screen_width, screen_height):
+    def __init__(self, screen_width, screen_height, spawn_range, obstacle_type=None):
         # obstacle images loaded in
         self.fence = pygame.transform.scale(
-            pygame.image.load("../stimuli/fence.png"), (50, 50)
+            pygame.image.load("../stimuli/fence.png"), (30, 30)
         )
         self.bush = pygame.transform.scale(
-            pygame.image.load("../stimuli/bush.png"), (50, 70)
+            pygame.image.load("../stimuli/bush.png"), (30, 30)
         )
         self.obstacle_list = [self.bush, self.fence]
-        self.image = random.choice(self.obstacle_list)
+        self.obstacle_type = obstacle_type
+        self.obstacle_type = obstacle_type
+        if self.obstacle_type is not None:
+            self.image = self.obstacle_list[self.obstacle_type]
+        else:
+            self.image = random.choice(self.obstacle_list)
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.rect.x = screen_width + random.randint(100, 300)
-        self.rect.y = 95
+        self.spawn_range = spawn_range
+        self.rect.x = screen_width + random.randint(spawn_range[0], spawn_range[1])
+        self.rect.y = 85
         self.speed = 5
         # speed of obstacle as it goes across the screen
 
     def move(self):
         self.rect.x -= self.speed
         if self.rect.right < 0:
-            self.rect.x = self.screen_width + random.randint(100, 500)
-            self.image = random.choice(self.obstacle_list)
+            self.rect.x = self.screen_width + random.randint(
+                self.spawn_range[0], self.spawn_range[1]
+            )
+            if self.obstacle_type is not None:
+                self.image = self.obstacle_list[self.obstacle_type]
+            else:
+                # selects an image at random from obstacles list
+                self.image = random.choice(self.obstacle_list)
             self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
             return True
         return False
@@ -157,10 +169,12 @@ def main():
     any_active_powerup_powerdown = False
     # allowing you to quit the game, and enter god mode if press the 0 key
     game_time = 0
-    time_limit = 90 * 60
+    time_limit = 90 * 60  # creating a minute and a half time limit
     while running:
         game_time += 1
-        if game_time >= time_limit:
+        if (
+            game_time >= time_limit
+        ):  # when the game_time exceeds the time_limit, the game ends
             end_screen.main()
             return
         for event in pygame.event.get():
