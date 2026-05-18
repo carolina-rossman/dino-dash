@@ -160,7 +160,7 @@ def main():
     # the two obstacles are in different ranges now so that they won't overlap
     spawned_obstacles = [
         Obstacles(screen_width, screen_height, (100, 250), obstacle_type=0),
-        Obstacles(screen_width, screen_height, (400, 550), obstacle_type=1),
+        Obstacles(screen_width, screen_height, (350, 500), obstacle_type=1),
     ]
     # setting variables to manipulate for powerups and powerdowns
     running = True
@@ -182,6 +182,7 @@ def main():
         if (
             game_time >= time_limit
         ):  # when the game_time exceeds the time_limit, the game ends
+            print("Winner! Winner! Winner!")
             end_screen.main()
             return
         for event in pygame.event.get():
@@ -301,6 +302,7 @@ def main():
                     pass
                 # if dino isn't in god_mode or the imunity powerup isn't active then if the obstacle is hit the death.screen.py runs
                 else:
+                    print("You died")
                     death_screen.main()
                     return
         for bg in background.bg:
